@@ -12,52 +12,69 @@ def display_student(student):
     print("-" * 40) 
 
 def add_student(): 
-
-    # Ask for name, email, and major 
-    # Create a list with the student info 
-    # Add it to students_list 
-    # Print a confirmation message 
     
     Name = input("Please enter the name of the student ")
     Email =input("Please enter the email adress ")
     Major =input("Please enter the major ")
     student = [Name, Email, Major]
     students_list.append(student)
-    print("New Student informations are added to the list")
+    print("New Student informations are added to the list ")
     return student
 
 def remove_student(): 
 
-    # TODO: Ask for name to remove 
-
-    # TODO: Search for the student 
-
-    # TODO: Ask for confirmation 
-
-    # TODO: Remove if confirmed 
-
-    pass  # Replace with your code 
+    Name = input("Please enter the name of the student ")
+    NameFound=False
+    for student in students_list:
+        if Name==student[0]:
+            NameFound=True
+            confirmation=input("Are you sure Y/N ")
+            if (confirmation=="y" or confirmation=="Y"):
+                students_list.remove(student)
+                print("Student " + Name + " removed")
+            else:
+                print("Operation cancelled")
+    if NameFound==False:  
+       print("There is no such student in students list")
 
 def search_students(): 
+    NameFound=False
+    search_criteria=input("Do you want see all students and Information Y/N")
+    if (search_criteria=="Y" or search_criteria=="y"):
+        for student in students_list:
+            display_student(student)
+    else:
+        Name=input("Please enter the name to see the informations ")
+        for student in students_list:
+            if Name==student[0]:
+                display_student(student)
+                NameFound=True
+        if NameFound==False:  
+           print("There is no such student in students list")
 
-    # TODO: Ask if viewing all or searching 
-
-    # TODO: Display results 
-
-    pass  # Replace with your code 
+ 
 
 def update_student(): 
-
-    # TODO: Ask for name to update 
-
-    # TODO: Find the student 
-
-    # TODO: Show current info and ask what to update 
-
-    # TODO: Get new value and update 
-
-    pass  # Replace with your code 
-
+    NameFound=False
+    
+    Name=input("\nWhich person would you like to update")
+    for student in students_list:
+        if Name==student[0]:
+           NameFound=True
+           display_student(student)
+           criteria=input("Would you like to update the name Y/N")
+           if (criteria=="Y" or criteria=="y"):
+                    student[0]=input("Please enter the new Name ")
+           criteria=input("Would you like to update the email adress Y/N")  
+           if (criteria=="Y" or criteria=="y"):
+                     student[1]=input("Please enter the new Email ")
+           criteria=input("Would you like to update the major Y/N")  
+           if (criteria=="Y" or criteria=="y"):
+                     student[2]=input("Please enter the new major ")
+           display_student(student)
+    if NameFound==False:  
+        print("There is no such student in students list")
+    
 # Main program 
 
 while True: 
@@ -84,8 +101,18 @@ while True:
 
     elif choice == "2": 
 
+        remove_student()
 
+    elif choice == "3": 
+        
+      search_students()
 
-        remove_student() 
+    elif choice == "4":
 
-    # TODO: Add remaining cases
+      update_student()
+
+    else:
+
+       print("Program terminated.")
+       break
+   
